@@ -12,9 +12,16 @@ const {
 } = require("./controllers/poll");
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
+const allowedOrigin = process.env.FRONTEND_URL;
 
+app.use(
+  cors({
+    origin: allowedOrigin,
+    credentials: true, // set to false if you’re not using cookies/auth headers
+  })
+);
 const port = process.env.PORT || 3000;
 
 const DB =
